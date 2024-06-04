@@ -15,11 +15,9 @@
                 <p class="text-sm">{{ session('success') }}</p>
                 </div>
             </div>
-            </div>
+        </div>
         @endif
 
-
-        <!-- This example requires Tailwind CSS v2.0+ -->
         <div class="flex flex-col">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -60,18 +58,17 @@
                             <a href="{{ route('posts.edit', $post) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                             <a href="#" class="text-red-600 hover:text-red-900 ml-3" onclick="
                             event.preventDefault();
-                            document.getElementById('destroy-post-form').submit();
-                            ">Supprimer
+                            if(confirm('Êtes-vous sûr de vouloir supprimer ce post ?')) {
+                                document.getElementById('destroy-post-form-{{ $post->id }}').submit();
+                            }">Supprimer</a>
 
-                                <form method="post" action="{{ route('posts.destroy', $post) }}" id="destroy-post-form">
-                                    @csrf
-                                    @method('delete')
-                                </form>
-                            </a>
+                            <form method="post" action="{{ route('posts.destroy', $post) }}" id="destroy-post-form-{{ $post->id }}">
+                                @csrf
+                                @method('delete')
+                            </form>
                         </td>
                         </tr>
                         @endforeach
-                        <!-- More people... -->
                     </tbody>
                     </table>
                 </div>
@@ -79,7 +76,6 @@
             </div>
         </div>
 
-        <!-- This example requires Tailwind CSS v2.0+ -->
         <div class="flex flex-col mt-10">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -109,7 +105,6 @@
                         </td>
                         </tr>
                         @endforeach
-                        <!-- More people... -->
                     </tbody>
                     </table>
                 </div>
